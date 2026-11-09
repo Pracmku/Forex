@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Telegram Assistant · 24/7 Lead Engine</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(145deg, #0b1426 0%, #101e33 100%);
+      color: #eef4ff;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .main-container {
+      max-width: 1300px;
+      width: 100%;
+    }
+
+    /* Hero section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+
+    .hero-content {
+      flex: 1 1 400px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0, 255, 170, 0.12);
+      color: #2fe6b0;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid rgba(47, 230, 176, 0.3);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(to right, #ffffff, #cde3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 i {
+      color: #2fe6b0;
+      -webkit-text-fill-color: #2fe6b0;
+      margin-right: 8px;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #a0b8d9;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #2fe6b0;
+      padding-left: 1.4rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: #2fe6b0;
+      border: none;
+      color: #0b1426;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: default;
+      box-shadow: 0 12px 25px -8px rgba(47, 230, 176, 0.4);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary i {
+      font-size: 1.3rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: #eef4ff;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: default;
+      backdrop-filter: blur(5px);
+      text-decoration: none;
+    }
+
+    .hero-visual {
+      flex: 1 1 300px;
+      background: radial-gradient(circle at 30% 40%, #1e3450, #0e1b2b);
+      border-radius: 2.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 30px 50px -20px #000000, inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(47, 230, 176, 0.2);
+      position: relative;
+    }
+
+    .chat-preview {
+      background: #0e1a28;
+      border-radius: 1.8rem;
+      padding: 1.4rem;
+      border: 1px solid #203a55;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1e2e40;
+      margin-bottom: 1rem;
+    }
+
+    .chat-header i {
+      background: #2fe6b0;
+      color: #0b1426;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .chat-header span {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .chat-header small {
+      color: #8ea9c9;
+      font-size: 0.8rem;
+      display: block;
+      font-weight: 400;
+    }
+
+    .chat-message {
+      background: #1d2d40;
+      padding: 0.9rem 1.2rem;
+      border-radius: 18px 18px 18px 4px;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: #deecff;
+      border-left: 3px solid #2fe6b0;
+      max-width: 90%;
+    }
+
+    .chat-message.user {
+      background: #162a3e;
+      border-radius: 18px 18px 4px 18px;
+      margin-left: auto;
+      border-left: none;
+      border-right: 3px solid #5d8bc9;
+      color: #c8dfff;
+    }
+
+    .tier-row {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0 10px;
+    }
+
+    .tier-badge {
+      background: #0e1a28;
+      border: 1px solid #2fe6b0;
+      color: #2fe6b0;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.8rem;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .chat-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      color: #6f8bb0;
+      font-size: 0.9rem;
+    }
+
+    .chat-actions i {
+      margin-right: 4px;
+    }
+
+    /* Core features grid */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      color: #9bb3d0;
+      font-size: 1.1rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 5rem;
+    }
+
+    .feature-card {
+      background: rgba(20, 34, 50, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 2rem 1.8rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(47, 230, 176, 0.15);
+      transition: all 0.25s;
+      box-shadow: 0 20px 30px -15px #00000040;
+    }
+
+    .feature-card:hover {
+      border-color: #2fe6b0;
+      transform: translateY(-5px);
+      background: rgba(26, 45, 65, 0.9);
+    }
+
+    .feature-icon {
+      background: linear-gradient(135deg, #2fe6b0, #1f9e8f);
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: #0b1426;
+      font-size: 1.8rem;
+      box-shadow: 0 12px 20px -10px #2fe6b0;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      color: #adc4de;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* highlight stats / escalation banner */
+    .escalation-banner {
+      background: linear-gradient(105deg, #102433 0%, #1b3147 100%);
+      border-radius: 3rem;
+      padding: 2.8rem 3rem;
+      margin: 2rem 0 4rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #2fe6b04d;
+      box-shadow: 0 20px 30px -10px #00000070;
+    }
+
+    .escalation-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .escalation-text h2 i {
+      color: #2fe6b0;
+      margin-right: 12px;
+    }
+
+    .escalation-text p {
+      color: #b6cee8;
+      max-width: 600px;
+      font-size: 1.1rem;
+    }
+
+    .escalation-tag {
+      background: #2fe6b0;
+      color: #0b1426;
+      font-weight: 800;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      box-shadow: 0 10px 20px -8px #2fe6b0;
+    }
+
+    /* footer */
+    .footer-note {
+      text-align: center;
+      color: #627d9c;
+      border-top: 1px solid #1e3349;
+      padding-top: 2rem;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-note i {
+      color: #2fe6b0;
+      margin: 0 4px;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .hero {
+        gap: 2rem;
+      }
+      .hero-sub {
+        font-size: 1rem;
+      }
+      .escalation-banner {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .escalation-tag {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- HERO / main pitch -->
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-robot" style="margin-right: 6px;"></i> 24/7 Forex Assistant
+        </div>
+        <h1>
+          <i class="fab fa-telegram"></i> Maximize your Forex reach<br>with an automated assistant
+        </h1>
+        <div class="hero-sub">
+          Capture investor interest & manage high-volume inquiries. The bot bridges marketing and conversion — never miss a funding lead.
+        </div>
+        <div class="hero-cta">
+          <span class="btn-primary"><i class="fab fa-telegram-plane"></i> Start bot demo</span>
+          <span class="btn-ghost"><i class="fas fa-chart-line"></i> See live track record</span>
+        </div>
+        <div style="margin-top: 2rem; display: flex; gap: 1.8rem; color: #8da9cc; font-size: 0.95rem;">
+          <span><i class="fas fa-check-circle" style="color:#2fe6b0;"></i> Instant lead capture</span>
+          <span><i class="fas fa-check-circle" style="color:#2fe6b0;"></i> Smart FAQ</span>
+          <span><i class="fas fa-check-circle" style="color:#2fe6b0;"></i> Interactive pitching</span>
+        </div>
+      </div>
+
+      <!-- visual preview (chat mockup) -->
+      <div class="hero-visual">
+        <div class="chat-preview">
+          <div class="chat-header">
+            <i class="fas fa-user-astronaut"></i>
+            <div>
+              <span>Forex Funding Assistant</span>
+              <small>online · 24/7</small>
+            </div>
+          </div>
+          <div class="chat-message">
+            👋 Welcome! I’m your Forex funding assistant. <br>
+            <span style="color: #2fe6b0; font-weight: 600;">Investment tiers:</span>
+            <div class="tier-row">
+              <span class="tier-badge">Starter $5k</span>
+              <span class="tier-badge">Pro $25k</span>
+              <span class="tier-badge">VIP $100k+</span>
+            </div>
+            Please share your contact to receive the investor deck.
+          </div>
+          <div class="chat-message user">
+            How are drawdowns managed? 📉
+          </div>
+          <div class="chat-message">
+            <i class="fas fa-shield-alt" style="color: #2fe6b0; margin-right: 8px;"></i> Max historical drawdown is 6.2%. Risk per trade ≤ 1%. Full Myfxbook link below 👇
+            <div class="chat-actions">
+              <span><i class="fas fa-file-pdf"></i> Investor deck</span>
+              <span><i class="fas fa-chart-bar"></i> Myfxbook</span>
+            </div>
+          </div>
+          <div class="chat-message" style="border-left-color: #f9c74f;">
+            <i class="fas fa-bolt" style="color: #f9c74f;"></i> High-value lead detected — routing to senior account manager.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core features (4 cards) -->
+    <div class="section-title">Everything your funnel needs</div>
+    <div class="section-sub">One automated Telegram assistant — from first hello to funded account.</div>
+
+    <div class="features-grid">
+      <!-- feature 1 -->
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-user-plus"></i></div>
+        <h3>Instant Lead Capturing</h3>
+        <p>Greets new users automatically, presents investment tiers, and collects contact info — no lead left behind.</p>
+      </div>
+      <!-- feature 2 -->
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-question-circle"></i></div>
+        <h3>Smart FAQ Handling</h3>
+        <p>Instantly answers minimum deposits, risk management, historical drawdowns, and payout schedules.</p>
+      </div>
+      <!-- feature 3 -->
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>Interactive Pitching</h3>
+        <p>Delivers structured onboarding, links to Myfxbook track record, and downloadable investor decks right in chat.</p>
+      </div>
+      <!-- feature 4 -->
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-arrow-up-right-dots"></i></div>
+        <h3>Seamless Escalation</h3>
+        <p>Identifies high-value prospects and smoothly routes them to your personal handle for manual closing.</p>
+      </div>
+    </div>
+
+    <!-- Escalation / highlight banner (extra emphasis) -->
+    <div class="escalation-banner">
+      <div class="escalation-text">
+        <h2><i class="fas fa-bolt"></i> High-value routing</h2>
+        <p>When a potential investor shows strong intent, the bot instantly alerts you and hands over the conversation — zero friction, maximum closing potential.</p>
+      </div>
+      <div class="escalation-tag">
+        <i class="fas fa-user-tie"></i> VIP escalation
+      </div>
+    </div>
+
+    <!-- Footer with trust / final note -->
+    <div class="footer-note">
+      <span><i class="fab fa-telegram"></i> Forex Funding Assistant — built for conversion</span>
+      <span>© 2025 · 24/7 automated lead engine</span>
+    </div>
+  </div>
+</body>
+</html>
